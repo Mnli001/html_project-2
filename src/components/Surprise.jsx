@@ -5,8 +5,7 @@ import Envelope from './Envelope';
 import LoveCounter from './LoveCounter';
 import Reasons from './Reasons';
 import MusicPlayer from './MusicPlayer';
-import SpaceBackground from './ui/animated-shader-background';
-import CatStickers from './CatStickers';
+import AnoAI from './ui/animated-shader-background';
 import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
 import FloatingMemories from './FloatingMemories';
@@ -25,51 +24,28 @@ export default function Surprise() {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-x-hidden bg-black p-4 pt-16 pb-48">
-      {/* Background Shader - Galaxy/Space */}
-      <SpaceBackground />
+    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-x-hidden bg-black px-4 sm:px-6 md:px-12 pt-16 pb-48">
+      {/* Background Shader - Pure Black + Subtle Gradient */}
+      <AnoAI />
 
       {/* Decorative details to fill space */}
       <FloatingMemories />
-      <CatStickers />
 
-      {/* Background Hearts/Stars Particle System */}
-      {[...Array(40)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-pink-400/50 pointer-events-none z-10"
-          initial={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            scale: Math.random() * 0.8 + 0.4,
-          }}
-          animate={{
-            top: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-            left: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-          }}
-          transition={{
-            duration: Math.random() * 40 + 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        >
-          {i % 3 === 0 ? '❤️' : i % 3 === 1 ? '✨' : '💖'}
-        </motion.div>
-      ))}
+
 
       <motion.div
         initial={{ opacity: 0, y: -30, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="z-30 text-center mb-12 mt-4 bg-black/40 px-12 py-8 rounded-[3rem] backdrop-blur-md border border-white/10 shadow-[0_0_50px_rgba(255,105,180,0.15)]"
+        className="z-30 text-center mb-16 mt-6 md:mt-10 bg-black/40 px-8 py-6 md:px-16 md:py-10 rounded-[2rem] md:rounded-[3rem] backdrop-blur-md border border-white/10 shadow-[0_0_50px_rgba(255,105,180,0.15)] max-w-[90vw] mx-auto"
       >
-        <h1 className="text-5xl md:text-7xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] tracking-wide">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] tracking-wide leading-tight">
           Төрсөн өдрийн мэнд! 🎉
         </h1>
-        <div className="w-48 h-1.5 mx-auto bg-gradient-to-r from-transparent via-pink-400 to-transparent rounded-full mt-6 opacity-80"></div>
+        <div className="w-32 md:w-48 h-1 md:h-1.5 mx-auto bg-gradient-to-r from-transparent via-pink-400 to-transparent rounded-full mt-6 opacity-80"></div>
       </motion.div>
 
-      <div className="z-30 w-full max-w-4xl flex flex-col items-center space-y-24 mt-8">
+      <div className="z-30 w-full max-w-3xl flex flex-col items-center space-y-16 md:space-y-24 mt-4">
         <BirthdayCake />
         <Envelope />
         <VideoPlayer />

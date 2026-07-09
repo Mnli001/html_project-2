@@ -14,50 +14,56 @@ export default function Reasons() {
   const [activeReason, setActiveReason] = useState("Одод дээр дарна уу...");
 
   return (
-    <div className="relative w-full max-w-3xl flex flex-col items-center my-16 mx-auto min-h-[500px] z-20">
-      <h3 className="text-center text-indigo-200 font-light mb-16 text-sm uppercase tracking-[0.2em] font-serif">Яагаад чамд татагдсан бэ?</h3>
+    <div className="w-full max-w-2xl mx-auto flex flex-col items-center my-12 px-4 z-20">
+      <h3 className="text-center text-indigo-200/80 font-light mb-10 text-sm md:text-base uppercase tracking-[0.2em] font-serif">
+        Яагаад чамд татагдсан бэ?
+      </h3>
       
-      {/* Central Fixed Text Box */}
-      <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 min-h-[140px] flex items-center justify-center p-6 text-center bg-black/50 backdrop-blur-md border border-white/20 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.1)] z-0">
+      {/* Central Text Display - Responsive height and perfect centering */}
+      <div className="w-full min-h-[160px] md:min-h-[180px] flex items-center justify-center p-6 md:p-10 text-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_30px_rgba(255,255,255,0.05)] mb-12">
         <AnimatePresence mode="wait">
           <motion.p
             key={activeReason}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="text-white font-handwriting text-3xl tracking-wide leading-relaxed"
+            initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.05, filter: "blur(4px)" }}
+            transition={{ duration: 0.4 }}
+            className="text-white/90 font-serif text-2xl md:text-3xl tracking-wide leading-relaxed drop-shadow-md"
           >
             {activeReason}
           </motion.p>
         </AnimatePresence>
       </div>
 
-      {/* Orbiting Stars */}
-      <div className="relative w-full h-[400px] flex items-center justify-center pointer-events-none">
-        {reasons.map((reason, index) => {
-          const angle = (index / reasons.length) * Math.PI * 2 - Math.PI / 2;
-          const radiusX = 220; // Elliptical orbit
-          const radiusY = 160;
-          const x = Math.cos(angle) * radiusX;
-          const y = Math.sin(angle) * radiusY;
-
-          return (
-            <motion.div
-              key={index}
-              className="absolute cursor-pointer pointer-events-auto"
-              style={{ x, y }}
-              whileHover={{ scale: 1.5 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setActiveReason(reason)}
-              animate={{
-                y: [y - 15, y + 15, y - 15],
-              }}
-              transition={{ repeat: Infinity, duration: 4 + index * 0.5, ease: "easeInOut" }}
-            >
-              <Star className="text-yellow-100 drop-shadow-[0_0_25px_rgba(255,255,255,0.8)]" fill="#fef08a" size={48} strokeWidth={1} />
-            </motion.div>
-          );
-        })}
+      {/* Floating Stars Container - Flex wrap for perfect mobile support */}
+      <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 w-full px-2">
+        {reasons.map((reason, index) => (
+          <motion.button
+            key={index}
+            onClick={() => setActiveReason(reason)}
+            whileHover={{ scale: 1.2, rotate: 15 }}
+            whileTap={{ scale: 0.9 }}
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{ 
+              y: {
+                repeat: Infinity, 
+                duration: 3 + index * 0.4, 
+                ease: "easeInOut",
+                delay: index * 0.2
+              }
+            }}
+            className="p-3 rounded-full hover:bg-white/5 transition-colors group focus:outline-none"
+          >
+            <Star 
+              className="text-yellow-100/80 group-hover:text-yellow-200 transition-colors drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" 
+              fill="currentColor" 
+              size={36} 
+              strokeWidth={1} 
+            />
+          </motion.button>
+        ))}
       </div>
     </div>
   );

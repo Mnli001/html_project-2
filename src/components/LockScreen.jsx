@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Delete } from 'lucide-react';
+import { motion, useAnimation } from 'framer-motion';
+import AnoAI from './ui/animated-shader-background';
+
+const CORRECT_CODE = "95157812";
 
 export default function LockScreen({ onUnlock }) {
-  const [passcode, setPasscode] = useState('');
-  const [shake, setShake] = useState(false);
-  const [message, setMessage] = useState('Нууц үг оруулна уу');
-  const [messageColor, setMessageColor] = useState('text-white');
-
-  const CORRECT_CODE = '95157812';
+  const [passcode, setPasscode] = useState("");
+  const [message, setMessage] = useState("Нууц үг оруулна уу");
+  const [messageColor, setMessageColor] = useState("text-white");
+  const controls = useAnimation();
 
   useEffect(() => {
     if (passcode.length === 8) {
@@ -27,19 +27,21 @@ export default function LockScreen({ onUnlock }) {
         }, 1000);
       } else {
         setMessage('Буруу байна');
-        setMessageColor('text-red-400');
-        setShake(true);
+        setMessageColor('text-rose-400');
+        controls.start({
+          x: [-10, 10, -10, 10, 0],
+          transition: { duration: 0.4 }
+        });
         setTimeout(() => {
-          setShake(false);
-          setPasscode('');
-          setMessage('Нууц үг оруулна уу');
-          setMessageColor('text-white');
-        }, 800);
+          setPasscode("");
+          setMessage("Нууц үг оруулна уу");
+          setMessageColor("text-white");
+        }, 1000);
       }
     }
-  }, [passcode, onUnlock]);
+  }, [passcode, controls, onUnlock]);
 
-  const handleKeyPress = (num) => {
+  const handlePress = (num) => {
     if (passcode.length < 8) {
       setPasscode(prev => prev + num);
     }
@@ -50,56 +52,51 @@ export default function LockScreen({ onUnlock }) {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-slate-900 select-none">
-      {/* Background Orbs for Liquid Glassmorphism */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-60 animate-blob"></div>
-      <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-60 animate-blob animation-delay-2000"></div>
-      <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-60 animate-blob animation-delay-4000"></div>
-
-      {/* Lock Screen Glass Panel */}
-      <motion.div
-        animate={shake ? { x: [-10, 10, -10, 10, 0] } : {}}
-        transition={{ duration: 0.4 }}
-        className="z-10 flex flex-col items-center w-full max-w-[340px] p-8 pb-10 space-y-12 bg-white/10 backdrop-blur-2xl rounded-[3rem] border border-white/20 shadow-2xl"
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#050505] overflow-hidden select-none">
+      
+      <motion.div 
+        animate={controls}
+        className="z-20 w-full max-w-[340px] flex flex-col items-center bg-[#1e2330]/80 backdrop-blur-xl border border-white/5 rounded-[2.5rem] py-12 px-6 shadow-2xl"
       >
-        <div className="flex flex-col items-center space-y-5">
-          <p className={`text-[1.1rem] font-medium tracking-wide transition-colors duration-300 ${messageColor}`}>
-            {message}
-          </p>
-          <div className="flex space-x-3">
-            {[...Array(8)].map((_, i) => (
-              <div
-                key={i}
-                className={`w-3.5 h-3.5 rounded-full border-[1.5px] transition-all duration-200 ${
-                  i < passcode.length ? 'bg-white border-white' : 'border-white/50 bg-transparent'
-                }`}
-              />
-            ))}
-          </div>
+        <p className={`font-medium tracking-wide text-lg mb-8 transition-colors duration-300 ${messageColor}`}>
+          {message}
+        </p>
+
+        <div className="flex space-x-3 mb-10">
+          {[...Array(8)].map((_, i) => (
+            <div 
+              key={i} 
+              className={`w-3.5 h-3.5 rounded-full border-[1.5px] transition-all duration-200 ${i < passcode.length ? 'bg-white border-white' : 'bg-transparent border-white/40'}`}
+            />
+          ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-x-6 gap-y-5">
+        <div className="grid grid-cols-3 gap-x-5 gap-y-5">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
             <button
               key={num}
-              onClick={() => handleKeyPress(num)}
-              className="flex items-center justify-center w-16 h-16 text-3xl font-light text-white transition-all rounded-full bg-white/5 hover:bg-white/20 active:bg-white/30 active:scale-95 backdrop-blur-md cursor-pointer"
+              onClick={() => handlePress(num.toString())}
+              className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-3xl font-light text-white bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors"
             >
               {num}
             </button>
           ))}
           <div />
           <button
-            onClick={() => handleKeyPress(0)}
-            className="flex items-center justify-center w-16 h-16 text-3xl font-light text-white transition-all rounded-full bg-white/5 hover:bg-white/20 active:bg-white/30 active:scale-95 backdrop-blur-md cursor-pointer"
+            onClick={() => handlePress("0")}
+            className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-3xl font-light text-white bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors"
           >
             0
           </button>
           <button
             onClick={handleDelete}
-            className="flex items-center justify-center w-16 h-16 text-white transition-all rounded-full hover:bg-white/10 active:bg-white/20 active:scale-95 cursor-pointer"
+            className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-white/70 hover:bg-white/5 active:bg-white/10 transition-colors"
           >
-            <Delete size={26} strokeWidth={1.5} />
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
+              <line x1="18" y1="9" x2="12" y2="15"></line>
+              <line x1="12" y1="9" x2="18" y2="15"></line>
+            </svg>
           </button>
         </div>
       </motion.div>
