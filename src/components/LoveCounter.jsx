@@ -4,7 +4,6 @@ export default function LoveCounter() {
   const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Ulaanbaatar Marathon 2026 was May 23, 2026
     const startDate = new Date('2026-05-23T09:00:00');
 
     const interval = setInterval(() => {
@@ -23,27 +22,27 @@ export default function LoveCounter() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 my-8 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl w-full max-w-md mx-auto">
-      <h3 className="text-pink-200 font-light mb-6 text-sm uppercase tracking-[0.2em]">Марафон дээр танилцсанаас хойш</h3>
-      <div className="flex justify-between w-full text-center px-4">
-        <div className="flex flex-col items-center">
-          <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">{time.days}</span>
-          <span className="text-xs text-pink-200 mt-2 tracking-wider">ӨДӨР</span>
+    <div className="flex flex-col items-center justify-center p-6 md:p-8 my-4 bg-white/[0.05] backdrop-blur-sm rounded-2xl md:rounded-3xl border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.03)] w-full max-w-[90vw] md:max-w-md mx-auto">
+      <h3 className="text-pink-200/70 font-light mb-5 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em]">Марафон дээр танилцсанаас хойш</h3>
+      <div className="flex justify-between w-full text-center px-2 md:px-4 gap-1">
+        <div className="flex flex-col items-center flex-1">
+          <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md tabular-nums">{time.days}</span>
+          <span className="text-[10px] md:text-xs text-pink-200/60 mt-1.5 md:mt-2 tracking-wider">ӨДӨР</span>
         </div>
-        <span className="text-3xl text-pink-300/50 mt-1">:</span>
-        <div className="flex flex-col items-center">
-          <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">{time.hours.toString().padStart(2, '0')}</span>
-          <span className="text-xs text-pink-200 mt-2 tracking-wider">ЦАГ</span>
+        <span className="text-2xl md:text-3xl text-pink-300/30 mt-0.5">:</span>
+        <div className="flex flex-col items-center flex-1">
+          <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md tabular-nums">{time.hours.toString().padStart(2, '0')}</span>
+          <span className="text-[10px] md:text-xs text-pink-200/60 mt-1.5 md:mt-2 tracking-wider">ЦАГ</span>
         </div>
-        <span className="text-3xl text-pink-300/50 mt-1">:</span>
-        <div className="flex flex-col items-center">
-          <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">{time.minutes.toString().padStart(2, '0')}</span>
-          <span className="text-xs text-pink-200 mt-2 tracking-wider">МИНУТ</span>
+        <span className="text-2xl md:text-3xl text-pink-300/30 mt-0.5">:</span>
+        <div className="flex flex-col items-center flex-1">
+          <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md tabular-nums">{time.minutes.toString().padStart(2, '0')}</span>
+          <span className="text-[10px] md:text-xs text-pink-200/60 mt-1.5 md:mt-2 tracking-wider">МИНУТ</span>
         </div>
-        <span className="text-3xl text-pink-300/50 mt-1 hidden md:block">:</span>
-        <div className="flex-col items-center hidden md:flex">
-          <span className="text-4xl md:text-5xl font-bold text-white drop-shadow-md">{time.seconds.toString().padStart(2, '0')}</span>
-          <span className="text-xs text-pink-200 mt-2 tracking-wider">СЕК</span>
+        <span className="text-2xl md:text-3xl text-pink-300/30 mt-0.5">:</span>
+        <div className="flex flex-col items-center flex-1">
+          <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-md tabular-nums">{time.seconds.toString().padStart(2, '0')}</span>
+          <span className="text-[10px] md:text-xs text-pink-200/60 mt-1.5 md:mt-2 tracking-wider">СЕК</span>
         </div>
       </div>
     </div>

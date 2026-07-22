@@ -1,56 +1,64 @@
-import { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import confetti from 'canvas-confetti';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Envelope from './Envelope';
 import LoveCounter from './LoveCounter';
 import Reasons from './Reasons';
 import MusicPlayer from './MusicPlayer';
-import AnoAI from './ui/animated-shader-background';
+import SpaceBackground from './ui/animated-shader-background';
 import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
 import FloatingMemories from './FloatingMemories';
+import FlowerRain from './FlowerRain';
 
 export default function Surprise() {
-  useEffect(() => {
-    // Initial Confetti Explosion on mount!
-    setTimeout(() => {
-      confetti({
-        particleCount: 200,
-        spread: 120,
-        origin: { y: 0.3 },
-        colors: ['#ffc0cb', '#ff69b4', '#ff1493', '#c71585', '#ffffff']
-      });
-    }, 800);
-  }, []);
+  const [isLetterClosed, setIsLetterClosed] = useState(false);
 
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-x-hidden bg-black px-4 sm:px-6 md:px-12 pt-16 pb-48">
-      {/* Background Shader - Pure Black + Subtle Gradient */}
-      <AnoAI />
+    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-x-hidden bg-black px-4 sm:px-6 md:px-8 lg:px-12 pt-12 md:pt-16 pb-32 md:pb-48">
+      {/* Space background */}
+      <SpaceBackground />
 
-      {/* Decorative details to fill space */}
-      <FloatingMemories />
+      {/* Continuous flower rain */}
+      <FlowerRain count={50} />
 
+      {/* Decorative polaroid memories - Only show after letter is closed */}
+      <AnimatePresence>
+        {isLetterClosed && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
+            <FloatingMemories />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-
-      <motion.div
-        initial={{ opacity: 0, y: -30, scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="z-30 text-center mb-16 mt-6 md:mt-10 bg-black/40 px-8 py-6 md:px-16 md:py-10 rounded-[2rem] md:rounded-[3rem] backdrop-blur-md border border-white/10 shadow-[0_0_50px_rgba(255,105,180,0.15)] max-w-[90vw] mx-auto"
-      >
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] tracking-wide leading-tight">
-          Төрсөн өдрийн мэнд! 🎉
-        </h1>
-        <div className="w-32 md:w-48 h-1 md:h-1.5 mx-auto bg-gradient-to-r from-transparent via-pink-400 to-transparent rounded-full mt-6 opacity-80"></div>
-      </motion.div>
-
-      <div className="z-30 w-full max-w-3xl flex flex-col items-center space-y-16 md:space-y-24 mt-4">
-        <BirthdayCake />
-        <Envelope />
-        <VideoPlayer />
-        <LoveCounter />
-        <Reasons />
+      {/* Main content */}
+      <div className={`z-30 w-full max-w-2xl lg:max-w-3xl flex flex-col items-center transition-all duration-1000 ${isLetterClosed ? 'space-y-12 md:space-y-20 mt-4' : 'justify-center min-h-[60vh] mt-0'}`}>
+        
+        <Envelope onLetterClose={() => setIsLetterClosed(true)} />
+        
+        <AnimatePresence>
+          {isLetterClosed && (
+            <motion.div 
+              initial={{ opacity: 0, y: 60, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full flex flex-col items-center space-y-16 md:space-y-24 relative z-10"
+            >
+              {/* Each component staggers in one by one */}
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.6, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+                <BirthdayCake />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.2, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+                <VideoPlayer />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+                <LoveCounter />
+              </motion.div>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+                <Reasons />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <MusicPlayer />

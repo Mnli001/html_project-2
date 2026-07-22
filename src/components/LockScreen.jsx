@@ -1,41 +1,45 @@
 import { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
-import AnoAI from './ui/animated-shader-background';
+import FlowerRain from './FlowerRain';
 
 const CORRECT_CODE = "95157812";
 
 export default function LockScreen({ onUnlock }) {
   const [passcode, setPasscode] = useState("");
   const [message, setMessage] = useState("Нууц үг оруулна уу");
-  const [messageColor, setMessageColor] = useState("text-white");
+  const [messageColor, setMessageColor] = useState("text-white/60");
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [showFlowers, setShowFlowers] = useState(false);
   const controls = useAnimation();
 
   useEffect(() => {
     if (passcode.length === 8) {
       if (passcode === CORRECT_CODE) {
-        setMessage('Зөв байна');
-        setMessageColor('text-green-400');
+        setMessage('Зөв байна ✨');
+        setMessageColor('text-emerald-400');
+        setIsCorrect(true);
+        setShowFlowers(true);
         
         const audio = document.getElementById('bg-music');
         if (audio) {
-          audio.volume = 0.6;
+          audio.volume = 0.4;
           audio.play().catch(e => console.log("Audio play failed", e));
         }
 
         setTimeout(() => {
           onUnlock();
-        }, 1000);
+        }, 3000);
       } else {
         setMessage('Буруу байна');
         setMessageColor('text-rose-400');
         controls.start({
-          x: [-10, 10, -10, 10, 0],
+          x: [-12, 12, -12, 12, 0],
           transition: { duration: 0.4 }
         });
         setTimeout(() => {
           setPasscode("");
           setMessage("Нууц үг оруулна уу");
-          setMessageColor("text-white");
+          setMessageColor("text-white/60");
         }, 1000);
       }
     }
@@ -52,52 +56,85 @@ export default function LockScreen({ onUnlock }) {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-[#050505] overflow-hidden select-none">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-space-gradient overflow-hidden select-none">
+      
+      {/* Massive flower rain on correct code! */}
+      {showFlowers && <FlowerRain count={80} />}
+
+      {/* Success glow effect */}
+      {isCorrect && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,_rgba(255,182,193,0.15)_0%,_transparent_70%)]"
+        />
+      )}
       
       <motion.div 
         animate={controls}
-        className="z-20 w-full max-w-[340px] flex flex-col items-center bg-[#1e2330]/80 backdrop-blur-xl border border-white/5 rounded-[2.5rem] py-12 px-6 shadow-2xl"
+        className="z-20 w-[90vw] max-w-[320px] md:max-w-[340px] flex flex-col items-center py-10 md:py-12 px-5 md:px-6 glass-panel rounded-3xl shadow-premium"
       >
-        <p className={`font-medium tracking-wide text-lg mb-8 transition-colors duration-300 ${messageColor}`}>
+        {/* Message */}
+        <motion.p 
+          className={`font-serif tracking-[0.15em] text-sm md:text-base mb-8 transition-colors duration-500 ${messageColor}`}
+          animate={isCorrect ? { scale: [1, 1.05, 1] } : {}}
+          transition={{ duration: 0.6 }}
+        >
           {message}
-        </p>
+        </motion.p>
 
-        <div className="flex space-x-3 mb-10">
+        {/* Passcode dots */}
+        <div className="flex space-x-2.5 md:space-x-3 mb-10">
           {[...Array(8)].map((_, i) => (
-            <div 
+            <motion.div 
               key={i} 
-              className={`w-3.5 h-3.5 rounded-full border-[1.5px] transition-all duration-200 ${i < passcode.length ? 'bg-white border-white' : 'bg-transparent border-white/40'}`}
+              className={`w-3 h-3 md:w-3.5 md:h-3.5 rounded-full border transition-all duration-300 ${
+                i < passcode.length 
+                  ? isCorrect 
+                    ? 'bg-emerald-400 border-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]' 
+                    : 'bg-[#ffb6c1] border-[#ffb6c1] shadow-[0_0_12px_rgba(255,182,193,0.5)]' 
+                  : 'bg-transparent border-white/20'
+              }`}
+              animate={i < passcode.length ? { scale: [0.8, 1.2, 1] } : {}}
+              transition={{ duration: 0.2 }}
             />
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-x-5 gap-y-5">
+        {/* Keypad */}
+        <div className="grid grid-cols-3 gap-x-4 gap-y-4 md:gap-x-5 md:gap-y-5">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-            <button
+            <motion.button
               key={num}
               onClick={() => handlePress(num.toString())}
-              className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-3xl font-light text-white bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors"
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+              whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,182,193,0.2)' }}
+              className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-2xl md:text-3xl font-light text-white/90 bg-transparent transition-all border border-transparent hover:border-white/10"
             >
               {num}
-            </button>
+            </motion.button>
           ))}
           <div />
-          <button
+          <motion.button
             onClick={() => handlePress("0")}
-            className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-3xl font-light text-white bg-white/10 hover:bg-white/20 active:bg-white/30 transition-colors"
+            whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
+            whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,182,193,0.2)' }}
+            className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-2xl md:text-3xl font-light text-white/90 bg-transparent transition-all border border-transparent hover:border-white/10"
           >
             0
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={handleDelete}
-            className="w-[72px] h-[72px] rounded-full flex flex-col items-center justify-center text-white/70 hover:bg-white/5 active:bg-white/10 transition-colors"
+            whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
+            whileTap={{ scale: 0.9 }}
+            className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-white/50 hover:text-[#ffb6c1] transition-all"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
               <line x1="18" y1="9" x2="12" y2="15"></line>
               <line x1="12" y1="9" x2="18" y2="15"></line>
             </svg>
-          </button>
+          </motion.button>
         </div>
       </motion.div>
     </div>
