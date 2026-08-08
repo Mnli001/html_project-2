@@ -69,7 +69,7 @@ export default function LockScreen({ onUnlock }) {
       
       <motion.div 
         animate={controls}
-        className="z-20 w-[90vw] max-w-[320px] md:max-w-[340px] flex flex-col items-center py-10 md:py-12 px-5 md:px-6 rounded-3xl"
+        className="z-20 w-[90vw] max-w-[320px] md:max-w-[340px] flex flex-col items-center py-10 md:py-12 px-5 md:px-6 rounded-3xl border border-white"
       >
         {/* Message */}
         <motion.p 
