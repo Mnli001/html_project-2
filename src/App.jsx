@@ -8,8 +8,7 @@ function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
 
   return (
-    <div className="w-full min-h-screen bg-space-gradient relative font-sans text-white">
-      <MouseEffects interactionMode="burst" color="#ffb6c1" effectSize={120} duration={0.8} />
+    <div className="w-full min-h-screen bg-black relative font-sans text-white">
       <audio id="bg-music" src="/bg-music.m4a" loop preload="auto" />
       
       <AnimatePresence mode="wait">

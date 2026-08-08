@@ -56,27 +56,24 @@ export default function LockScreen({ onUnlock }) {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-space-gradient overflow-hidden select-none">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden select-none">
       
-      {/* Massive flower rain on correct code! */}
-      {showFlowers && <FlowerRain count={80} />}
-
       {/* Success glow effect */}
       {isCorrect && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,_rgba(255,182,193,0.15)_0%,_transparent_70%)]"
+          className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05)_0%,_transparent_70%)]"
         />
       )}
       
       <motion.div 
         animate={controls}
-        className="z-20 w-[90vw] max-w-[320px] md:max-w-[340px] flex flex-col items-center py-10 md:py-12 px-5 md:px-6 glass-panel rounded-3xl shadow-premium"
+        className="z-20 w-[90vw] max-w-[320px] md:max-w-[340px] flex flex-col items-center py-10 md:py-12 px-5 md:px-6 rounded-3xl"
       >
         {/* Message */}
         <motion.p 
-          className={`font-serif tracking-[0.15em] text-sm md:text-base mb-8 transition-colors duration-500 ${messageColor}`}
+          className={`font-sans tracking-[0.15em] text-sm md:text-base mb-8 transition-colors duration-500 ${messageColor}`}
           animate={isCorrect ? { scale: [1, 1.05, 1] } : {}}
           transition={{ duration: 0.6 }}
         >
@@ -92,7 +89,7 @@ export default function LockScreen({ onUnlock }) {
                 i < passcode.length 
                   ? isCorrect 
                     ? 'bg-emerald-400 border-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.6)]' 
-                    : 'bg-[#ffb6c1] border-[#ffb6c1] shadow-[0_0_12px_rgba(255,182,193,0.5)]' 
+                    : 'bg-white border-white shadow-[0_0_12px_rgba(255,255,255,0.5)]' 
                   : 'bg-transparent border-white/20'
               }`}
               animate={i < passcode.length ? { scale: [0.8, 1.2, 1] } : {}}
@@ -108,7 +105,7 @@ export default function LockScreen({ onUnlock }) {
               key={num}
               onClick={() => handlePress(num.toString())}
               whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
-              whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,182,193,0.2)' }}
+              whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,255,255,0.2)' }}
               className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-2xl md:text-3xl font-light text-white/90 bg-transparent transition-all border border-transparent hover:border-white/10"
             >
               {num}
@@ -118,7 +115,7 @@ export default function LockScreen({ onUnlock }) {
           <motion.button
             onClick={() => handlePress("0")}
             whileHover={{ backgroundColor: 'rgba(255,255,255,0.1)' }}
-            whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,182,193,0.2)' }}
+            whileTap={{ scale: 0.9, backgroundColor: 'rgba(255,255,255,0.2)' }}
             className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-2xl md:text-3xl font-light text-white/90 bg-transparent transition-all border border-transparent hover:border-white/10"
           >
             0
@@ -127,7 +124,7 @@ export default function LockScreen({ onUnlock }) {
             onClick={handleDelete}
             whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
             whileTap={{ scale: 0.9 }}
-            className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-white/50 hover:text-[#ffb6c1] transition-all"
+            className="w-[64px] h-[64px] md:w-[72px] md:h-[72px] rounded-full flex items-center justify-center text-white/50 hover:text-white transition-all"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path>
