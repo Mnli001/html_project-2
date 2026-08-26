@@ -1,7 +1,7 @@
 export default function VideoPlayer() {
   return (
     <div className="w-full max-w-sm md:max-w-lg lg:max-w-2xl mx-auto flex flex-col items-center my-4 md:my-8 z-20 px-2">
-      <h3 className="text-indigo-200/70 font-light mb-4 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em] font-serif text-center">Бидний дурсамж</h3>
+      <h3 className="text-indigo-200/70 font-light mb-4 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em] font-sans text-center">Заавал үзээрэй</h3>
       <div className="relative w-full aspect-video bg-white/[0.04] backdrop-blur-sm border border-white/10 rounded-xl md:rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.05)] overflow-hidden group">
         <video 
           src="/video1.mp4" 
