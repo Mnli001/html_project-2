@@ -52,7 +52,6 @@ export default function Surprise() {
           )}
         </AnimatePresence>
       </div>
-      </div>
     </div>
   );
 }
