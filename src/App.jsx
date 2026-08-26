@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import LockScreen from './components/LockScreen';
 import Surprise from './components/Surprise';
 import MouseEffects from './components/MouseEffects';
+import MusicPlayer from './components/MusicPlayer';
 
 function App() {
   const [isUnlocked, setIsUnlocked] = useState(false);
@@ -35,6 +36,8 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {isUnlocked && <MusicPlayer />}
     </div>
   );
 }

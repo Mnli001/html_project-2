@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Envelope from './Envelope';
 import LoveCounter from './LoveCounter';
 import Reasons from './Reasons';
-import MusicPlayer from './MusicPlayer';
 import SpaceBackground from './ui/animated-shader-background';
 import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
@@ -53,8 +52,7 @@ export default function Surprise() {
           )}
         </AnimatePresence>
       </div>
-
-      <MusicPlayer />
+      </div>
     </div>
   );
 }
