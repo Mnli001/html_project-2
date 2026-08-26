@@ -21,14 +21,7 @@ export default function Surprise() {
       {/* Continuous flower rain */}
       <FlowerRain count={50} />
 
-      {/* Decorative polaroid memories - Only show after letter is closed */}
-      <AnimatePresence>
-        {isLetterClosed && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
-            <FloatingMemories />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Decorative polaroid memories removed as per request */}
 
       {/* Main content */}
       <div className={`z-30 w-full max-w-2xl lg:max-w-3xl flex flex-col items-center transition-all duration-1000 ${isLetterClosed ? 'space-y-12 md:space-y-20 mt-4' : 'justify-center min-h-[60vh] mt-0'}`}>
