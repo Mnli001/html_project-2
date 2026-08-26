@@ -55,6 +55,20 @@ export default function LockScreen({ onUnlock }) {
     setPasscode(prev => prev.slice(0, -1));
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (isCorrect) return;
+      if (e.key >= '0' && e.key <= '9') {
+        handlePress(e.key);
+      } else if (e.key === 'Backspace') {
+        handleDelete();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [passcode, isCorrect]);
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden select-none">
       
