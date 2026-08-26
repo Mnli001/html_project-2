@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import confetti from 'canvas-confetti';
 
 export default function Envelope({ onLetterClose }) {
@@ -104,6 +105,7 @@ export default function Envelope({ onLetterClose }) {
             </svg>
         </motion.div>
 
+        {/* Text over Wax Seal */}
         {!isOpen && (
             <motion.div 
                 className="absolute z-50 flex flex-col items-center justify-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-8"
@@ -116,73 +118,76 @@ export default function Envelope({ onLetterClose }) {
 
       </motion.div>
 
-      {/* Fullscreen Reading View */}
-      <AnimatePresence>
-        {showLetter && (
-          <motion.div 
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/60"
-            onClick={(e) => { e.stopPropagation(); handleCloseLetter(); }}
-          >
+      {/* Fullscreen Reading View (Rendered via Portal to escape containing blocks) */}
+      {createPortal(
+        <AnimatePresence>
+          {showLetter && (
             <motion.div 
-              initial={{ scale: 0.95, y: 30, rotateX: 5 }}
-              animate={{ scale: 1, y: 0, rotateX: 0 }}
-              exit={{ scale: 0.95, y: 20, opacity: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="w-full max-w-lg md:max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-16 bg-[#fdfbf7] rounded-sm shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative border-l-4 border-[#e0a96d]" 
-              onClick={e => e.stopPropagation()}
-              style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/cream-paper.png')" }}
+              initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
+              exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-black/60"
+              onClick={(e) => { e.stopPropagation(); handleCloseLetter(); }}
             >
-              <button 
-                className="absolute top-6 right-6 text-[#a38a6d] hover:text-black transition-colors rounded-full w-10 h-10 flex items-center justify-center text-2xl font-light" 
-                onClick={handleCloseLetter}
+              <motion.div 
+                initial={{ scale: 0.95, y: 30, rotateX: 5 }}
+                animate={{ scale: 1, y: 0, rotateX: 0 }}
+                exit={{ scale: 0.95, y: 20, opacity: 0 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                className="w-full max-w-lg md:max-w-2xl max-h-[85vh] overflow-y-auto p-10 md:p-16 bg-[#fdfbf7] rounded-sm shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative border-l-4 border-[#e0a96d]" 
+                onClick={e => e.stopPropagation()}
+                style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/cream-paper.png')" }}
               >
-                ✕
-              </button>
-              
-              <div className="flex justify-center mb-8">
-                {/* Elegant SVG ornament */}
-                <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M30 0 L40 10 L30 20 L20 10 Z" fill="#e0a96d" opacity="0.6"/>
-                    <line x1="0" y1="10" x2="20" y2="10" stroke="#e0a96d" strokeWidth="1" opacity="0.4"/>
-                    <line x1="40" y1="10" x2="60" y2="10" stroke="#e0a96d" strokeWidth="1" opacity="0.4"/>
-                </svg>
-              </div>
+                <button 
+                  className="absolute top-6 right-6 text-[#a38a6d] hover:text-black transition-colors rounded-full w-10 h-10 flex items-center justify-center text-2xl font-light" 
+                  onClick={handleCloseLetter}
+                >
+                  ✕
+                </button>
+                
+                <div className="flex justify-center mb-8">
+                  {/* Elegant SVG ornament */}
+                  <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M30 0 L40 10 L30 20 L20 10 Z" fill="#e0a96d" opacity="0.6"/>
+                      <line x1="0" y1="10" x2="20" y2="10" stroke="#e0a96d" strokeWidth="1" opacity="0.4"/>
+                      <line x1="40" y1="10" x2="60" y2="10" stroke="#e0a96d" strokeWidth="1" opacity="0.4"/>
+                  </svg>
+                </div>
 
-              <h2 className="text-3xl md:text-5xl font-serif text-[#2a2426] mb-10 pb-6 text-center border-b border-[#e0a96d]/20 tracking-wide">Хонгор чамдаа</h2>
-              
-              <p className="text-[#3a3335] leading-[2.2] font-serif text-lg md:text-2xl text-pretty first-letter:text-6xl first-letter:font-bold first-letter:text-[#e0a96d] first-letter:mr-2 first-letter:float-left">
-                {text.split('').map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: index * 0.02 + 0.5 }}
-                  >
-                    {char}
-                  </motion.span>
-                ))}
-              </p>
+                <h2 className="text-3xl md:text-5xl font-serif text-[#2a2426] mb-10 pb-6 text-center border-b border-[#e0a96d]/20 tracking-wide">Хонгор чамдаа</h2>
+                
+                <p className="text-[#3a3335] leading-[2.2] font-serif text-lg md:text-2xl text-pretty first-letter:text-6xl first-letter:font-bold first-letter:text-[#e0a96d] first-letter:mr-2 first-letter:float-left">
+                  {text.split('').map((char, index) => (
+                    <motion.span
+                      key={index}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.02 + 0.5 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </p>
 
-              <div className="mt-16 text-center">
-                 <motion.button 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: text.length * 0.02 + 1.5, duration: 1 }}
-                    onClick={handleCloseLetter}
-                    className="px-8 py-3 border border-[#e0a96d] text-[#8c7355] font-serif uppercase tracking-widest text-sm hover:bg-[#e0a96d] hover:text-white transition-all duration-500 rounded-sm"
-                 >
-                    Зүрхэнд хадгалах
-                 </motion.button>
-              </div>
+                <div className="mt-16 text-center">
+                   <motion.button 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: text.length * 0.02 + 1.5, duration: 1 }}
+                      onClick={handleCloseLetter}
+                      className="px-8 py-3 border border-[#e0a96d] text-[#8c7355] font-serif uppercase tracking-widest text-sm hover:bg-[#e0a96d] hover:text-white transition-all duration-500 rounded-sm"
+                   >
+                      Зүрхэнд хадгалах
+                   </motion.button>
+                </div>
 
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 }
