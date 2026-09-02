@@ -48,7 +48,7 @@ body {
 }
 
 .font-handwriting {
-  font-family: 'Caveat', cursive;
+  font-family: 'Caveat', 'Marck Script', 'Dancing Script', cursive;
 }
 
 /* Keep previous animations for compatibility */

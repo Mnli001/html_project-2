@@ -155,9 +155,9 @@ export default function Envelope({ onLetterClose }) {
                   </svg>
                 </div>
 
-                <h2 className="text-3xl md:text-5xl font-serif text-[#2a2426] mb-10 pb-6 text-center border-b border-[#e0a96d]/20 tracking-wide">Хонгор чамдаа</h2>
+                <h2 className="text-4xl md:text-6xl font-handwriting text-[#2a2426] mb-8 pb-4 text-center border-b border-[#e0a96d]/30 tracking-wide font-bold">Хонгор чамдаа</h2>
                 
-                <p className="text-[#3a3335] leading-[2.2] font-serif text-lg md:text-2xl text-pretty first-letter:text-6xl first-letter:font-bold first-letter:text-[#e0a96d] first-letter:mr-2 first-letter:float-left">
+                <p className="text-[#2c2426] leading-[1.9] font-handwriting text-2xl md:text-3xl text-pretty first-letter:text-5xl first-letter:font-bold first-letter:text-[#e0a96d] first-letter:mr-2 first-letter:float-left">
                   {text.split('').map((char, index) => (
                     <motion.span
                       key={index}
@@ -170,15 +170,15 @@ export default function Envelope({ onLetterClose }) {
                   ))}
                 </p>
 
-                <div className="mt-16 text-center">
+                <div className="mt-12 text-center">
                    <motion.button 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: text.length * 0.02 + 1.5, duration: 1 }}
+                      transition={{ delay: text.length * 0.02 + 1.2, duration: 0.8 }}
                       onClick={handleCloseLetter}
-                      className="px-8 py-3 border border-[#e0a96d] text-[#8c7355] font-serif uppercase tracking-widest text-sm hover:bg-[#e0a96d] hover:text-white transition-all duration-500 rounded-sm"
+                      className="px-8 py-2.5 border border-[#e0a96d] text-[#8c7355] font-handwriting tracking-wider text-xl sm:text-2xl hover:bg-[#e0a96d] hover:text-white transition-all duration-300 rounded-md"
                    >
-                      Зүрхэнд хадгалах
+                      Зүрхэнд хадгалах ✨
                    </motion.button>
                 </div>
 
