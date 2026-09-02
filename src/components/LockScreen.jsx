@@ -88,8 +88,8 @@ export default function LockScreen({ onUnlock }) {
       
       {showFlowers && <FlowerRain count={60} />}
 
-      {/* Ambient background glow */}
-      <div className="absolute w-[350px] h-[350px] bg-rose-500/10 blur-[120px] rounded-full pointer-events-none" />
+      {/* Ambient background glow optimized for mobile GPUs */}
+      <div className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] bg-rose-500/15 blur-3xl rounded-full pointer-events-none transform-gpu" />
 
       {/* Success glow effect */}
       {isCorrect && (

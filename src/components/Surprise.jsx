@@ -19,8 +19,8 @@ export default function Surprise() {
       {/* Space background */}
       <SpaceBackground />
 
-      {/* Continuous flower rain */}
-      <FlowerRain count={50} />
+      {/* Continuous flower rain (responsive count) */}
+      <FlowerRain />
 
       {/* Main content */}
       <div className={`z-30 w-full max-w-2xl lg:max-w-3xl flex flex-col items-center transition-all duration-1000 ${isLetterClosed ? 'space-y-12 md:space-y-20 mt-4' : 'justify-center min-h-[60vh] mt-0'}`}>

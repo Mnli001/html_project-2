@@ -80,20 +80,28 @@ const PREMIUM_PALETTE = [
   '#ffffff', '#fdfbf7', '#ffd700', '#ffeb3b', '#e6d5c3'
 ];
 
-export default function FlowerRain({ count = 40 }) {
+export default function FlowerRain({ count }) {
+  const effectiveCount = useMemo(() => {
+    if (count) return count;
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return 18; // Light for mobile
+    }
+    return 30; // Smooth for desktop
+  }, [count]);
+
   const flowers = useMemo(() => {
-    return [...Array(count)].map((_, i) => ({
+    return [...Array(effectiveCount)].map((_, i) => ({
       id: i,
       type: FLOWER_TYPES[Math.floor(Math.random() * FLOWER_TYPES.length)],
       color: PREMIUM_PALETTE[Math.floor(Math.random() * PREMIUM_PALETTE.length)],
       left: Math.random() * 105 - 2.5,
-      size: 14 + Math.random() * 24, // slightly smaller, more elegant
-      delay: (i / count) * 10, // spread out more
-      duration: 12 + Math.random() * 8, // much slower fall
+      size: 14 + Math.random() * 20,
+      delay: (i / effectiveCount) * 8,
+      duration: 10 + Math.random() * 6,
       rotation: Math.random() * 360,
-      swayX: (Math.random() - 0.5) * 150, // wider sway
+      swayX: (Math.random() - 0.5) * 120,
     }));
-  }, [count]);
+  }, [effectiveCount]);
 
   const renderFlower = (f) => {
     switch(f.type) {
@@ -108,18 +116,17 @@ export default function FlowerRain({ count = 40 }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-[1] pointer-events-none overflow-hidden transform-gpu">
       {flowers.map(f => (
         <div
           key={f.id}
-          className="absolute"
+          className="absolute will-change-transform"
           style={{
             left: `${f.left}%`,
-            top: '-60px',
+            top: '-50px',
             transform: `rotate(${f.rotation}deg)`,
             animation: `flower-rain-fall ${f.duration}s cubic-bezier(0.4, 0, 0.2, 1) ${f.delay}s infinite`,
             '--sway-x': `${f.swayX}px`,
-            filter: 'drop-shadow(0 4px 12px rgba(255,255,255,0.1))'
           }}
         >
           {renderFlower(f)}
@@ -128,17 +135,17 @@ export default function FlowerRain({ count = 40 }) {
       <style>{`
         @keyframes flower-rain-fall {
           0% { 
-            transform: translateY(-60px) translateX(0) rotate(0deg); 
+            transform: translateY(-50px) translateX(0) rotate(0deg); 
             opacity: 0; 
           }
-          10% { opacity: 0.8; }
+          10% { opacity: 0.85; }
           50% { 
-            transform: translateY(50vh) translateX(var(--sway-x)) rotate(360deg);
-            opacity: 0.6;
+            transform: translateY(50vh) translateX(var(--sway-x)) rotate(180deg);
+            opacity: 0.7;
           }
-          90% { opacity: 0.8; }
+          90% { opacity: 0.85; }
           100% { 
-            transform: translateY(115vh) translateX(calc(var(--sway-x) * -0.5)) rotate(720deg);
+            transform: translateY(110vh) translateX(calc(var(--sway-x) * -0.5)) rotate(360deg);
             opacity: 0;
           }
         }
