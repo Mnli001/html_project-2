@@ -6,8 +6,11 @@ import Reasons from './Reasons';
 import SpaceBackground from './ui/animated-shader-background';
 import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
-import FloatingMemories from './FloatingMemories';
 import FlowerRain from './FlowerRain';
+import Timeline from './Timeline';
+import BucketList from './BucketList';
+import LoveQuiz from './LoveQuiz';
+import FireworksFinale from './FireworksFinale';
 
 export default function Surprise() {
   const [isLetterClosed, setIsLetterClosed] = useState(false);
@@ -19,8 +22,6 @@ export default function Surprise() {
 
       {/* Continuous flower rain */}
       <FlowerRain count={50} />
-
-      {/* Decorative polaroid memories removed as per request */}
 
       {/* Main content */}
       <div className={`z-30 w-full max-w-2xl lg:max-w-3xl flex flex-col items-center transition-all duration-1000 ${isLetterClosed ? 'space-y-12 md:space-y-20 mt-4' : 'justify-center min-h-[60vh] mt-0'}`}>
@@ -35,18 +36,37 @@ export default function Surprise() {
               transition={{ duration: 1.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="w-full flex flex-col items-center space-y-16 md:space-y-24 relative z-10"
             >
-              {/* Each component staggers in one by one */}
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.6, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+              {/* Staggered interactive components */}
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.6, duration: 1.2 }}>
                 <BirthdayCake />
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.2, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
-                <VideoPlayer />
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.0, duration: 1.2 }}>
                 <LoveCounter />
               </motion.div>
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.4, duration: 1.2 }}>
+                <Timeline />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.8, duration: 1.2 }}>
+                <VideoPlayer />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.2, duration: 1.2 }}>
                 <Reasons />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.6, duration: 1.2 }}>
+                <BucketList />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.0, duration: 1.2 }}>
+                <LoveQuiz />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.4, duration: 1.2 }}>
+                <FireworksFinale />
               </motion.div>
             </motion.div>
           )}
@@ -55,3 +75,4 @@ export default function Surprise() {
     </div>
   );
 }
+
