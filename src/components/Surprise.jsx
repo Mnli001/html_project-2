@@ -8,7 +8,6 @@ import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
 import FlowerRain from './FlowerRain';
 import Timeline from './Timeline';
-import BucketList from './BucketList';
 import LoveQuiz from './LoveQuiz';
 import FireworksFinale from './FireworksFinale';
 
@@ -58,14 +57,10 @@ export default function Surprise() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.6, duration: 1.2 }}>
-                <BucketList />
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.0, duration: 1.2 }}>
                 <LoveQuiz />
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.4, duration: 1.2 }}>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.0, duration: 1.2 }}>
                 <FireworksFinale />
               </motion.div>
             </motion.div>
@@ -75,4 +70,5 @@ export default function Surprise() {
     </div>
   );
 }
+
 
