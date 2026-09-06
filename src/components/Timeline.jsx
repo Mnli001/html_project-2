@@ -1,28 +1,36 @@
 import { motion } from 'framer-motion';
-import { Flag, MessageCircleHeart, Sparkles, Cake } from 'lucide-react';
+import { Flag, Coffee, Heart, Sparkles, Cake } from 'lucide-react';
 
 const milestones = [
   {
     icon: Flag,
-    title: "Анхны Уулзалт",
+    title: "Анх Танилцсан Өдөр",
     date: "Улаанбаатарын Марафон",
     description: "Бүх зүйл эхэлсэн тэр нэгэн дурсгалтай өдөр. Анхны харц, анхны яриа...",
     color: "from-rose-500 to-pink-500",
     border: "border-rose-500/30"
   },
   {
-    icon: MessageCircleHeart,
-    title: "Өдөр Бүрийн Яриа",
-    date: "Дасалцсан өдрүүд",
-    description: "Өдөр бүр илүү ихээр бие биедээ дасаж, чамтай байх үнэхээр сайхан байдаг болсон.",
-    color: "from-pink-500 to-purple-500",
+    icon: Coffee,
+    title: "Анхны Болзоо",
+    date: "Дотноссон мөч",
+    description: "Хамтдаа сууж, цаг хугацаа яаж өнгөрснийг ч анзааралгүй ярилцсан тэр нандин болзоо.",
+    color: "from-amber-500 to-rose-500",
+    border: "border-amber-500/30"
+  },
+  {
+    icon: Heart,
+    title: "Анхны Үнсэлт",
+    date: "Зүрх догдолсон үдэш",
+    description: "Дэлхий ертөнц зогссон юм шиг, зүрх хамгийн чанга цохилсон тэр мартагдашгүй мөч...",
+    color: "from-pink-500 to-rose-600",
     border: "border-pink-500/30"
   },
   {
     icon: Sparkles,
-    title: "Нандин Дурсамжууд",
-    date: "Бүтээсэн мөч бүхэн",
-    description: "Хамтдаа инээлдэж, нэг нэгнээ ойлгож, илүү дотноссон цаг хугацаа.",
+    title: "Энэ Гайхалтай Харилцаа Эхэлсэн Өдөр",
+    date: "Бидний шинэ эхлэл",
+    description: "Нэг нэгнийхээ гарнаас атгаж, хамтдаа урагшлахаар шийдсэн хамгийн нандин өдөр.",
     color: "from-purple-500 to-indigo-500",
     border: "border-purple-500/30"
   },
@@ -30,7 +38,7 @@ const milestones = [
     icon: Cake,
     title: "Өнөөдөр",
     date: "Төрсөн Өдрийн Баяр",
-    description: "Чамдаа зориулсан энэхүү онцгой сюрприз ба шинэ эхлэл ✨",
+    description: "Чамдаа зориулсан энэхүү онцгой сюрприз ба бидний үргэлжлэх сайхан түүх ✨",
     color: "from-amber-400 to-rose-500",
     border: "border-amber-400/40"
   }
