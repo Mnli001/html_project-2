@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="w-full min-h-screen bg-black relative font-sans text-white">
-      <audio id="bg-music" src="/bg-music.m4a" loop preload="auto" />
+      <audio id="bg-music" src="/bg-music.mp3" loop preload="auto" />
       
       <AnimatePresence mode="wait">
         {!isUnlocked ? (

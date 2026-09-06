@@ -49,7 +49,7 @@ export default function MusicPlayer() {
           <p className="text-[10px] text-pink-300 uppercase tracking-[0.2em] leading-none font-medium mb-1.5">
             {isPlaying ? "Тоглож байна" : "Зогссон"}
           </p>
-          <p className="text-xs text-white/90 font-light leading-none tracking-wide">290 - Be My Summer</p>
+          <p className="text-xs text-white/90 font-light leading-none tracking-wide">Cuco - Lover Is a Day</p>
         </div>
       </div>
     </div>
