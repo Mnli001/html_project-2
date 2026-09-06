@@ -131,7 +131,7 @@ export default function OpenWhenLetters() {
 
               <div className="flex justify-between items-center pt-2 text-xs text-white/40">
                 <span className="flex items-center gap-1.5 text-pink-300/80">
-                  <Heart size={14} className="fill-pink-400 text-pink-400" /> Үргэлж хайрладаг шүү
+                  <Heart size={14} className="fill-pink-400 text-pink-400" /> Хайртай шүү
                 </span>
                 <button
                   onClick={() => setActiveLetter(null)}
