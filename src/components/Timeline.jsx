@@ -36,8 +36,8 @@ const milestones = [
   },
   {
     icon: Cake,
-    title: "Өнөөдөр",
-    date: "Төрсөн Өдрийн Баяр",
+    title: "Чиний минь төрсөн өдөр",
+    date: "Онцгой баярын өдөр",
     description: "Чамдаа зориулсан энэхүү онцгой сюрприз ба бидний үргэлжлэх сайхан түүх ✨",
     color: "from-amber-400 to-rose-500",
     border: "border-amber-400/40"
