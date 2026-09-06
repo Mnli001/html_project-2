@@ -38,23 +38,23 @@ export default function Surprise() {
               className="w-full flex flex-col items-center space-y-16 md:space-y-24 relative z-10"
             >
               {/* Staggered interactive components */}
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.6, duration: 1.2 }}>
-                <BirthdayCake />
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.0, duration: 1.2 }}>
-                <LoveCounter />
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.4, duration: 1.2 }}>
-                <Timeline />
-              </motion.div>
-
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.8, duration: 1.2 }}>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.4, duration: 1.2 }}>
                 <VideoPlayer />
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.2, duration: 1.2 }}>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 0.8, duration: 1.2 }}>
+                <BirthdayCake />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.2, duration: 1.2 }}>
+                <LoveCounter />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 1.6, duration: 1.2 }}>
+                <Timeline />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.0, duration: 1.2 }}>
                 <Reasons />
               </motion.div>
 
