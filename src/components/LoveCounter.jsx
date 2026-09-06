@@ -28,7 +28,7 @@ export default function LoveCounter() {
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-8 my-4 bg-white/[0.05] backdrop-blur-md rounded-2xl md:rounded-3xl border border-white/10 shadow-[0_0_30px_rgba(255,182,193,0.08)] w-full max-w-[92vw] md:max-w-md mx-auto transition-all">
       <h3 className="text-pink-200/80 font-light mb-5 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em] font-sans text-center">
-        Марафон дээр танилцсанаас хойш
+        Анх танилцсан өдрөөс хойш
       </h3>
       <div className="flex justify-between w-full text-center px-2 md:px-4 gap-1 sm:gap-2">
         <div className="flex flex-col items-center flex-1">
