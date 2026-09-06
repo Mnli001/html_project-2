@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Flag, Coffee, Heart, Sparkles, Cake } from 'lucide-react';
+import { Flag, FerrisWheel, Heart, Sparkles, Cake } from 'lucide-react';
 
 const milestones = [
   {
@@ -11,10 +11,10 @@ const milestones = [
     border: "border-rose-500/30"
   },
   {
-    icon: Coffee,
+    icon: FerrisWheel,
     title: "Анхны Болзоо",
-    date: "Дотноссон мөч",
-    description: "Хамтдаа сууж, цаг хугацаа яаж өнгөрснийг ч анзааралгүй ярилцсан тэр нандин болзоо.",
+    date: "Үндэсний Соёл Амралтын Хүрээлэн",
+    description: "Хамтдаа парк орж галзуу хулгана, дээрэмчний хөлөг онгоцон дээр орилолдон сууж, зүрх догдолсон тэр мартагдашгүй өдөр 🎢🏴‍☠️",
     color: "from-amber-500 to-rose-500",
     border: "border-amber-500/30"
   },
