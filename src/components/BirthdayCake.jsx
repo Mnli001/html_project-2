@@ -64,9 +64,14 @@ export default function BirthdayCake() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center my-8 md:my-16 z-30 cursor-pointer group" onClick={handleBlowOut}>
-      <h3 className="text-[#a38a6d] font-light mb-10 md:mb-14 text-sm md:text-base uppercase tracking-[0.4em] font-sans transition-colors group-hover:text-[#e0a96d]">
-        {blownOut ? "Хүсэл чинь биелэх болтугай ✨" : "Лаагаа үлээгээрэй"}
-      </h3>
+      <div className="text-center mb-8 md:mb-12">
+        <h3 className="text-[#e0a96d] font-serif mb-2 text-lg md:text-xl font-medium tracking-wide">
+          {blownOut ? "Хүсэл чинь биелэх болтугай ✨" : "Төрсөн Өдрийн Бялуу 🎂"}
+        </h3>
+        <p className="text-xs md:text-sm text-pink-200/70 font-sans tracking-wider animate-pulse">
+          {blownOut ? "Хайртдаа хамгийн сайхан бүхнийг хүсье ❤️" : "💡 Хүслээ бодоод бялуу дээр товшиж лаагаа үлээгээрэй"}
+        </p>
+      </div>
       
       <motion.div 
         animate={blownOut ? { scale: [1, 1.08, 1], rotate: [0, -1, 1, 0] } : {}}

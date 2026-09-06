@@ -4,6 +4,22 @@ import { Play } from 'lucide-react';
 export default function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
 
+  const handlePlay = () => {
+    setIsPlaying(true);
+    const bgAudio = document.getElementById('bg-music');
+    if (bgAudio && !bgAudio.paused) {
+      bgAudio.pause();
+    }
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+    const bgAudio = document.getElementById('bg-music');
+    if (bgAudio && bgAudio.paused) {
+      bgAudio.play().catch(() => {});
+    }
+  };
+
   return (
     <div className="w-full max-w-sm md:max-w-lg lg:max-w-2xl mx-auto flex flex-col items-center my-6 md:my-10 z-20 px-2">
       <h3 className="text-pink-200/80 font-light mb-4 md:mb-6 text-xs md:text-sm uppercase tracking-[0.2em] font-sans text-center">
@@ -13,8 +29,10 @@ export default function VideoPlayer() {
         <video 
           src="/video1.mp4" 
           controls 
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
+          playsInline
+          onPlay={handlePlay}
+          onPause={handlePause}
+          onEnded={handlePause}
           className="w-full h-full object-cover rounded-2xl md:rounded-3xl"
         >
           Таны хөтөч видео дэмжихгүй байна.
