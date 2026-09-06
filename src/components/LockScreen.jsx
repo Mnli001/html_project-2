@@ -33,7 +33,7 @@ export default function LockScreen({ onUnlock }) {
         
         const audio = document.getElementById('bg-music');
         if (audio) {
-          audio.volume = 0.5;
+          audio.volume = 0.25;
           audio.play().catch(e => console.log("Audio play deferred", e));
         }
 
