@@ -8,7 +8,9 @@ import VideoPlayer from './VideoPlayer';
 import BirthdayCake from './BirthdayCake';
 import FlowerRain from './FlowerRain';
 import Timeline from './Timeline';
-import LoveQuiz from './LoveQuiz';
+import OpenWhenLetters from './OpenWhenLetters';
+import LoveCoupons from './LoveCoupons';
+import BirthdayWishJar from './BirthdayWishJar';
 import FireworksFinale from './FireworksFinale';
 
 export default function Surprise() {
@@ -56,11 +58,19 @@ export default function Surprise() {
                 <Reasons />
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.6, duration: 1.2 }}>
-                <LoveQuiz />
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.5, duration: 1.2 }}>
+                <OpenWhenLetters />
               </motion.div>
 
-              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.0, duration: 1.2 }}>
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 2.8, duration: 1.2 }}>
+                <LoveCoupons />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.1, duration: 1.2 }}>
+                <BirthdayWishJar />
+              </motion.div>
+
+              <motion.div initial={{ opacity: 0, y: 40, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} transition={{ delay: 3.4, duration: 1.2 }}>
                 <FireworksFinale />
               </motion.div>
             </motion.div>
